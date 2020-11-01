@@ -1,11 +1,31 @@
 #ifndef BALL_H
 #define BALL_H
 
+#include <QGraphicsEllipseItem>
+#include <QObject>
+#include "paddle.h"
 
-class Ball
+class Ball : public QObject, public QGraphicsEllipseItem
 {
+    Q_OBJECT
+
 public:
-    Ball();
+    Ball(int width, int height);
+
+
+public slots:
+   void move();
+   void setPaddles(Paddle *player1, Paddle *player2);
+   int getHeight() const;
+   int getWidth() const;
+
+private:
+
+   Paddle *paddle1;
+   Paddle *paddle2;
+   int WIDTH = 10;
+   int HEIGHT = 10;
+   qreal dx, dy, speed;
 };
 
 #endif // BALL_H
