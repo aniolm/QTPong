@@ -15,6 +15,7 @@ SOURCES += \
 
 HEADERS += \
     ball.h \
+    config.h \
     paddle.h
 
 FORMS +=

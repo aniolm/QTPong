@@ -1,22 +1,14 @@
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
+#include <QGraphicsView>
+#include "config.h"
 #include "paddle.h"
 #include "ball.h"
-#include <QGraphicsView>
 
-#define PADDLE_WIDTH 5
-#define PADDLE_HEIGHT 100
 
-#define BOARD_WIDTH 800
-#define BOARD_HEIGHT 600
 
-#define BALL_WIDTH 10
-#define BALL_HEIGHT 10
 
-//#define BALL_SPEED 20
-//#define BALL_X_INCREMENT 10
-//#define BALL_Y_INCREMENT 10
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +17,7 @@ int main(int argc, char *argv[])
     // create a game scene
     QGraphicsScene * gameScene = new QGraphicsScene();
     gameScene->setSceneRect(0,0,BOARD_WIDTH,BOARD_HEIGHT);
+    gameScene->setBackgroundBrush(Qt::black);
 
     //create game objects
     Paddle * paddle1 = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -54,8 +47,6 @@ int main(int argc, char *argv[])
     gameView->setFixedSize(800,600);
     gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-
 
     return a.exec();
 }

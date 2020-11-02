@@ -11,8 +11,11 @@ public:
     void keyPressEvent(QKeyEvent * event);
     int getHeight() const;
     int getWidth() const;
+    int getScore() const;
+    void increaseScore();
 
 private:
+    int score;
     int HEIGHT;
     int WIDTH;
 };

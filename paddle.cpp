@@ -6,6 +6,7 @@
 Paddle::Paddle(int width, int height) : HEIGHT(height), WIDTH(width)
 {
    setRect(0, 0, WIDTH, HEIGHT);
+   setBrush((QBrush)Qt::white);
 }
 
 int Paddle::getWidth() const
@@ -18,6 +19,15 @@ int Paddle::getHeight() const
     return HEIGHT;
 }
 
+int Paddle::getScore() const
+{
+    return score;
+}
+void Paddle::increaseScore()
+{
+    ++score;
+    return ;
+}
 
 void Paddle::keyPressEvent(QKeyEvent *event)
 {
