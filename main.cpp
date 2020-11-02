@@ -1,17 +1,14 @@
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsItem>
-#include "paddle.h"
 #include <QGraphicsView>
+#include "config.h"
+#include "paddle.h"
+#include "ball.h"
 
-#define PADDLE_WIDTH 5
-#define PADDLE_HEIGHT 100
 
-#define BOARD_WIDTH 800
-#define BOARD_HEIGHT 600
 
-#define BALL_WIDTH 10
-#define BALL_HEIGHT 10
+
 
 int main(int argc, char *argv[])
 {
@@ -20,34 +17,36 @@ int main(int argc, char *argv[])
     // create a game scene
     QGraphicsScene * gameScene = new QGraphicsScene();
     gameScene->setSceneRect(0,0,BOARD_WIDTH,BOARD_HEIGHT);
+    gameScene->setBackgroundBrush(Qt::black);
 
     //create game objects
     Paddle * paddle1 = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT);
-    paddle1->setPos(5, (BOARD_HEIGHT / 2.0) - paddle1->getHeight());
+    paddle1->setPos(5, (BOARD_HEIGHT / 2.0) - (paddle1->getHeight()/2));
 
     paddle1->setFlag(QGraphicsItem::ItemIsFocusable);
     paddle1->setFocus();
 
     Paddle * paddle2 = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT);
-    paddle2->setPos(BOARD_WIDTH - paddle2->getWidth() - 5, (BOARD_HEIGHT / 2) - paddle2->getHeight());
+    paddle2->setPos(BOARD_WIDTH - paddle2->getWidth() - 5, (BOARD_HEIGHT / 2) - (paddle2->getHeight()/2));
 
-    //Ball * ball = new Ball;
-    //ball->setPos(x(),y());
-    //scene()->addItem(ball);
+    Ball * ball = new Ball(BALL_WIDTH, BALL_HEIGHT);
+    ball->setPaddles(paddle1, paddle2);
+    //ball->setPos(paddle1->x() + ball->getWidth(), paddle1->y() + paddle1->getHeight() / 2);
+    ball->setPos( BOARD_WIDTH / 2 , BOARD_HEIGHT / 2);
 
+    //add game objects to the scene
     gameScene->addItem(paddle1);
     gameScene->addItem(paddle2);
+    gameScene->addItem(ball);
 
-
-    QGraphicsView * gameView = new QGraphicsView(gameScene);
 
     //create game view
+    QGraphicsView * gameView = new QGraphicsView(gameScene);
+
     gameView->show();
     gameView->setFixedSize(800,600);
     gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-
 
     return a.exec();
 }
