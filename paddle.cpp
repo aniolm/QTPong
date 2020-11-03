@@ -3,7 +3,7 @@
 #include <QGraphicsScene>
 #include <ball.h>
 
-Paddle::Paddle(int width, int height) : HEIGHT(height), WIDTH(width)
+Paddle::Paddle(int width, int height) : score(0), HEIGHT(height), WIDTH(width)
 {
    setRect(0, 0, WIDTH, HEIGHT);
    setBrush((QBrush)Qt::white);
@@ -23,11 +23,7 @@ int Paddle::getScore() const
 {
     return score;
 }
-void Paddle::increaseScore()
-{
-    ++score;
-    return ;
-}
+
 
 void Paddle::keyPressEvent(QKeyEvent *event)
 {
@@ -43,3 +39,9 @@ void Paddle::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void Paddle::increaseScore()
+{
+    ++score;
+    emit scoreIncreased(score);
+    return ;
+}
