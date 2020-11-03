@@ -4,7 +4,7 @@
 #include <cmath>
 #include "config.h"
 
-Ball::Ball(int width, int height) :  WIDTH(width), HEIGHT(height), dx(-1), dy(-1), speed(10)
+Ball::Ball(int width, int height) :  WIDTH(width), HEIGHT(height), dx(-1), dy(0), speed(10)
 {
     setRect(0,0,WIDTH,HEIGHT);
     setBrush((QBrush)Qt::white);

@@ -2,9 +2,11 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 #include <QGraphicsView>
+#include <QGraphicsLineItem>
 #include "config.h"
 #include "paddle.h"
 #include "ball.h"
+#include "score.h"
 
 
 
@@ -18,6 +20,9 @@ int main(int argc, char *argv[])
     QGraphicsScene * gameScene = new QGraphicsScene();
     gameScene->setSceneRect(0,0,BOARD_WIDTH,BOARD_HEIGHT);
     gameScene->setBackgroundBrush(Qt::black);
+
+    QGraphicsLineItem * pitchLine = new QGraphicsLineItem(BOARD_WIDTH/2, 0 , BOARD_WIDTH/2, BOARD_HEIGHT);
+    pitchLine->setPen(QPen(Qt::white, 2, Qt::DashLine));
 
     //create game objects
     Paddle * paddle1 = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -34,17 +39,24 @@ int main(int argc, char *argv[])
     //ball->setPos(paddle1->x() + ball->getWidth(), paddle1->y() + paddle1->getHeight() / 2);
     ball->setPos( BOARD_WIDTH / 2 , BOARD_HEIGHT / 2);
 
+    Score * score1 = new Score(paddle1);
+    score1->setPos(BOARD_WIDTH/2-75,50);
+    Score * score2 = new Score(paddle2);
+    score2->setPos(BOARD_WIDTH/2+50,50);
+    
     //add game objects to the scene
+    gameScene->addItem(pitchLine);
     gameScene->addItem(paddle1);
     gameScene->addItem(paddle2);
     gameScene->addItem(ball);
-
+    gameScene->addItem(score1);
+    gameScene->addItem(score2);
 
     //create game view
     QGraphicsView * gameView = new QGraphicsView(gameScene);
 
     gameView->show();
-    gameView->setFixedSize(800,600);
+    gameView->setFixedSize(BOARD_WIDTH,BOARD_HEIGHT);
     gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 

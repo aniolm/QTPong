@@ -11,12 +11,14 @@ CONFIG += c++11
 SOURCES += \
     ball.cpp \
     main.cpp \
-    paddle.cpp
+    paddle.cpp \
+    score.cpp
 
 HEADERS += \
     ball.h \
     config.h \
-    paddle.h
+    paddle.h \
+    score.h
 
 FORMS +=
 

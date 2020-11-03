@@ -11,13 +11,14 @@ class Ball : public QObject, public QGraphicsEllipseItem
 
 public:
     Ball(int width, int height);
+    void setPaddles(Paddle *player1, Paddle *player2);
+    void setScores(Paddle *score1, Paddle *score2);
+    int getHeight() const;
+    int getWidth() const;
 
 
 public slots:
    void move();
-   void setPaddles(Paddle *player1, Paddle *player2);
-   int getHeight() const;
-   int getWidth() const;
 
 private:
 
