@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     ball.cpp \
+    game.cpp \
     main.cpp \
     paddle.cpp \
     score.cpp
@@ -17,6 +18,7 @@ SOURCES += \
 HEADERS += \
     ball.h \
     config.h \
+    game.h \
     paddle.h \
     score.h
 
