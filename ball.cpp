@@ -78,6 +78,6 @@ void Ball::move()
         }
 
         setPos(x() + dx*speed, y() + dy*speed);
-        //paddle2->randomMove(y());
+
 }
 
