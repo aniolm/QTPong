@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     ball.cpp \
+    button.cpp \
     game.cpp \
     main.cpp \
     paddle.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     ball.h \
+    button.h \
     config.h \
     game.h \
     paddle.h \
@@ -28,3 +30,6 @@ FORMS +=
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    qtpong.qrc

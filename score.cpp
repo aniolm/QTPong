@@ -8,7 +8,9 @@ Score::Score(Paddle * paddle)
     connect(paddle ,SIGNAL(scoreIncreased(int)),this,SLOT(updateScore(int)));
     QFont * font = new QFont;
     font->setPointSize(20);
+    font->setFamily("LCD Solid");
     this->setFont(*font);
+
 }
 
 

@@ -1,8 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define PADDLE_WIDTH 5
-#define PADDLE_HEIGHT 100
+#define PADDLE_WIDTH 20
+#define PADDLE_HEIGHT 120
 
 #define BOARD_WIDTH 800
 #define BOARD_HEIGHT 600

@@ -1,11 +1,11 @@
 #ifndef BALL_H
 #define BALL_H
 
-#include <QGraphicsEllipseItem>
+#include <QGraphicsRectItem>
 #include <QObject>
 #include "paddle.h"
 
-class Ball : public QObject, public QGraphicsEllipseItem
+class Ball : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 

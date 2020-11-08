@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/fonts">
+        <file>LcdSolid-VPzB.ttf</file>
+    </qresource>
+</RCC>

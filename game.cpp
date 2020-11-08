@@ -2,11 +2,66 @@
 
 Game::Game()
 {
+
+    //add custom font to application
+    QFontDatabase::addApplicationFont(":/fonts/LcdSolid-VPzB.ttf");
+
     // create a game scene
-    QGraphicsScene * gameScene = new QGraphicsScene();
+    gameScene = new QGraphicsScene();
     gameScene->setSceneRect(0,0,BOARD_WIDTH,BOARD_HEIGHT);
     gameScene->setBackgroundBrush(Qt::black);
 
+
+
+    //set-up game view
+
+    setScene(gameScene);
+    setFixedSize(BOARD_WIDTH,BOARD_HEIGHT);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+}
+
+void Game::displayInstructions(){
+    // create the title text
+    QGraphicsTextItem* titleText = new QGraphicsTextItem(QString("QT PONG"));
+    titleText->setDefaultTextColor(Qt::white);
+    QFont titleFont("LCD Solid",50);
+    titleText->setFont(titleFont);
+    int txPos = this->width()/2 - titleText->boundingRect().width()/2;
+    int tyPos = 150;
+    titleText->setPos(txPos,tyPos);
+    gameScene->addItem(titleText);
+
+    QGraphicsTextItem* instructionText = new QGraphicsTextItem(QString("Use UP and DOWN keys to move your paddle."));
+    instructionText->setDefaultTextColor(Qt::white);
+    QFont instFont("LCD Solid",15);
+    instructionText->setFont(instFont);
+    int instxPos = this->width()/2 - instructionText->boundingRect().width()/2;
+    int instyPos = 250 ;
+    instructionText->setPos(instxPos,instyPos);
+    gameScene->addItem(instructionText);
+
+
+    // create the play button
+    Button* playButton = new Button(QString("PLAY"));
+    int bxPos = this->width()/2 - playButton->boundingRect().width()/2;
+    int byPos = 350;
+    playButton->setPos(bxPos,byPos);
+    connect(playButton,SIGNAL(clicked()),this,SLOT(start()));
+    gameScene->addItem(playButton);
+
+    // create the quit button
+    Button* quitButton = new Button(QString("QUIT"));
+    int qxPos = this->width()/2 - quitButton->boundingRect().width()/2;
+    int qyPos = 425;
+    quitButton->setPos(qxPos,qyPos);
+    connect(quitButton,SIGNAL(clicked()),this,SLOT(close()));
+    gameScene->addItem(quitButton);
+}
+
+void Game::start(){
+    // clear the screen
+    gameScene->clear();
     QGraphicsLineItem * pitchLine = new QGraphicsLineItem(BOARD_WIDTH/2, 0 , BOARD_WIDTH/2, BOARD_HEIGHT);
     pitchLine->setPen(QPen(Qt::white, 2, Qt::DashLine));
 
@@ -38,10 +93,4 @@ Game::Game()
     gameScene->addItem(score1);
     gameScene->addItem(score2);
 
-    //set-up game view
-
-    setScene(gameScene);
-    setFixedSize(BOARD_WIDTH,BOARD_HEIGHT);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
