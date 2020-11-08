@@ -5,8 +5,11 @@
 #include <QGraphicsView>
 #include <QGraphicsLineItem>
 #include <QFontDatabase>
-#include "button.h"
 #include <QGraphicsTextItem>
+#include <QTimer>
+#include <QDebug>
+#include <cstdlib>
+#include "button.h"
 #include "config.h"
 #include "paddle.h"
 #include "ball.h"
@@ -22,9 +25,13 @@ public:
 
 public slots:
     void start();
+    void moveComputerPaddle();
 
 private:
     QGraphicsScene * gameScene;
+    Paddle * paddle1;
+    Paddle * paddle2;
+    Ball * ball;
 };
 
 #endif // GAME_H

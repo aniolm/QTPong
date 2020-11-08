@@ -19,6 +19,8 @@ Game::Game()
     setFixedSize(BOARD_WIDTH,BOARD_HEIGHT);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+
 }
 
 void Game::displayInstructions(){
@@ -66,24 +68,23 @@ void Game::start(){
     pitchLine->setPen(QPen(Qt::white, 2, Qt::DashLine));
 
     //create game objects
-    Paddle * paddle1 = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT);
+    paddle1 = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT);
     paddle1->setPos(5, (BOARD_HEIGHT / 2.0) - (paddle1->getHeight()/2));
 
     paddle1->setFlag(QGraphicsItem::ItemIsFocusable);
     paddle1->setFocus();
 
-    Paddle * paddle2 = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT);
+    paddle2 = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT);
     paddle2->setPos(BOARD_WIDTH - paddle2->getWidth() - 5, (BOARD_HEIGHT / 2) - (paddle2->getHeight()/2));
 
-    Ball * ball = new Ball(BALL_WIDTH, BALL_HEIGHT);
+    ball = new Ball(BALL_WIDTH, BALL_HEIGHT);
     ball->setPaddles(paddle1, paddle2);
-    //ball->setPos(paddle1->x() + ball->getWidth(), paddle1->y() + paddle1->getHeight() / 2);
     ball->setPos( BOARD_WIDTH / 2 , BOARD_HEIGHT / 2);
 
     Score * score1 = new Score(paddle1);
-    score1->setPos(BOARD_WIDTH/2-75,50);
+
     Score * score2 = new Score(paddle2);
-    score2->setPos(BOARD_WIDTH/2+50,50);
+
 
     //add game objects to the scene
     gameScene->addItem(pitchLine);
@@ -92,5 +93,33 @@ void Game::start(){
     gameScene->addItem(ball);
     gameScene->addItem(score1);
     gameScene->addItem(score2);
+
+    score1->setPos(BOARD_WIDTH/2-15-50,50);
+    score2->setPos(BOARD_WIDTH/2-15+50,50);
+
+    ////set-up computer move
+    QTimer * computerTimer = new QTimer();
+    connect(computerTimer, SIGNAL(timeout()), this, SLOT(moveComputerPaddle()));
+    computerTimer->start(100);
+
+}
+
+void Game::moveComputerPaddle()
+{
+    qreal ballcenter, paddlecenter;
+    ballcenter = ball->y()+BALL_HEIGHT/2;
+    paddlecenter = paddle2->y()+PADDLE_HEIGHT/2;
+    if (abs(ballcenter-paddlecenter)>20)
+    {
+        if(ballcenter < paddlecenter)
+        {
+            paddle2->setPos(paddle2->x(),paddle2->y()-10);
+        }
+        else
+         {
+             paddle2->setPos(paddle2->x(), paddle2->y() +10);
+         }
+    }
+    return;
 
 }
