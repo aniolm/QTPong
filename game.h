@@ -26,12 +26,14 @@ public:
 public slots:
     void start();
     void moveComputerPaddle();
+    void displayGameOver();
 
 private:
     QGraphicsScene * gameScene;
     Paddle * paddle1;
     Paddle * paddle2;
     Ball * ball;
+    QTimer * computerTimer;
 };
 
 #endif // GAME_H

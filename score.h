@@ -19,6 +19,7 @@ public:
 public slots:
     void updateScore(int score);
 
+
 private:
     int score2;
 

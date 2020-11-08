@@ -21,6 +21,7 @@ Game::Game()
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 
+
 }
 
 void Game::displayInstructions(){
@@ -76,15 +77,17 @@ void Game::start(){
 
     paddle2 = new Paddle(PADDLE_WIDTH, PADDLE_HEIGHT);
     paddle2->setPos(BOARD_WIDTH - paddle2->getWidth() - 5, (BOARD_HEIGHT / 2) - (paddle2->getHeight()/2));
+    //connect(paddle1 ,SIGNAL(gameOver()),this,SLOT(displayGameOver()));
+    connect(paddle2 ,SIGNAL(gameOver()),this,SLOT(displayGameOver()));
 
     ball = new Ball(BALL_WIDTH, BALL_HEIGHT);
     ball->setPaddles(paddle1, paddle2);
     ball->setPos( BOARD_WIDTH / 2 , BOARD_HEIGHT / 2);
 
     Score * score1 = new Score(paddle1);
-
+    score1->setPos(BOARD_WIDTH/2-15-50,50);
     Score * score2 = new Score(paddle2);
-
+    score2->setPos(BOARD_WIDTH/2-15+50,50);
 
     //add game objects to the scene
     gameScene->addItem(pitchLine);
@@ -94,11 +97,8 @@ void Game::start(){
     gameScene->addItem(score1);
     gameScene->addItem(score2);
 
-    score1->setPos(BOARD_WIDTH/2-15-50,50);
-    score2->setPos(BOARD_WIDTH/2-15+50,50);
-
     ////set-up computer move
-    QTimer * computerTimer = new QTimer();
+    computerTimer = new QTimer();
     connect(computerTimer, SIGNAL(timeout()), this, SLOT(moveComputerPaddle()));
     computerTimer->start(100);
 
@@ -121,5 +121,22 @@ void Game::moveComputerPaddle()
          }
     }
     return;
+
+}
+
+void Game::displayGameOver()
+{
+
+    QGraphicsTextItem* gameOver = new QGraphicsTextItem(QString("GAME OVER"));
+    gameOver->setDefaultTextColor(Qt::white);
+    QFont gameOverFont("LCD Solid",50);
+    gameOver->setFont(gameOverFont);
+    int txPos = this->width()/2 - gameOver->boundingRect().width()/2;
+    int tyPos = 150;
+    gameOver->setPos(txPos,tyPos);
+    gameScene->removeItem(ball);
+    computerTimer->stop();
+    delete ball;
+    gameScene->addItem(gameOver);
 
 }

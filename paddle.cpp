@@ -43,5 +43,9 @@ void Paddle::increaseScore()
 {
     ++score;
     emit scoreIncreased(score);
+    if (score>2)
+    {
+        emit gameOver();
+    }
     return ;
 }

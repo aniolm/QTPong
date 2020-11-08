@@ -18,6 +18,7 @@ public:
 
 signals:
     void scoreIncreased(int score);
+    void gameOver();
 
 private:
     int score;
